@@ -6,6 +6,14 @@
 
     Fetch data from a Bio::KEGGI::ko object
 
+=head1 AUTHOR
+
+    Haizhou Liu, zeroliu-at-gmail-dot-com
+
+=head1 VERSION
+
+    0.1.2
+    
 =head1 METHODS
 
 =head2 ec
@@ -64,9 +72,9 @@ use base qw(Bio::KEGG);
 
 # use Smart::Comments;
 
-our $VERSION = 'v0.0.2';
+our $VERSION = 'v0.1.2';
 
-=head2 ec
+=begin ec
     Name:   ec
     Disc:   Get KEGG entry ECs
     ------------------------------------------------------------------
@@ -77,13 +85,15 @@ our $VERSION = 'v0.0.2';
     Return: A reference to an array.
 =cut
 
+=begin
 sub ec {
     my $self = shift;
     
     return $self->{'ec'};
 }
+=cut
 
-=head2 pathway
+=begin pathway
     Name:   pathway
     Disc:   Get KEGG entry PATHWAY ids
     ------------------------------------------------------------------
@@ -94,13 +104,15 @@ sub ec {
     Return: A reference to an array.
 =cut
 
+=begin
 sub pathway {
     my $self = shift;
     
     return $self->{'pathway'};
 }
+=cut
 
-=head2 gene
+=begin gene
     Name:   gene
     Disc:   Get KEGG ko entry GENES information
     ------------------------------------------------------------------

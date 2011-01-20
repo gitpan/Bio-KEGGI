@@ -6,7 +6,7 @@ package Bio::KEGGI;
     
 =head1 VERSION
 
-    Version 0.0.2
+    Version 0.1.2
 
 =head1 SYNOPSIS
 
@@ -33,13 +33,18 @@ package Bio::KEGGI;
     
     KEGG data details could be retrieved by module Bio::KEGG.
 
+=head1 SEE ALSO
+
+    L<Bio::SeqIO::kegg> also provides a KEGG sequence input/output stream.
+
 =head1 AUTHOR
 
     Haizhou Liu, zeroliu-at-gmail-dot-com
     
 =head1 BUGS
 
-    This module works for Unix text file format only, which ends with a "\n".
+    This module works for Unix text file format only, which lines end with a
+    "\n".
     
     Please use other softwares, such as dos2unix to convert input file if
     necessary.
@@ -54,7 +59,7 @@ package Bio::KEGGI;
 		        -type => $type, # A fake parameter
             );
     Args:   $file: A KEGG file: genome, ko, pathway
-            $type: 'genome' | 'ko' | 'pathway' 
+            $type: 'genome', 'ko', 'pathway' or 'gene' 
     Return: A Bio::KEGGI object
     
 =cut
@@ -69,9 +74,9 @@ use Text::Trim;
 
 use Bio::KEGG;
 
-our $VERSION = "v0.0.2";
+our $VERSION = "v0.1.2";
 
-=head2 new
+=begin new
     Name:   new
     Desc:   A constructor for a KEGGI object.
     Usage:  Bio::KEGGI->new(
@@ -79,7 +84,7 @@ our $VERSION = "v0.0.2";
 		        -type => $type, # A fake parameter
             );
     Args:   $file: A KEGG file: genome, ko, pathway
-            $type: 'genome' | 'ko' | 'pathway' 
+            $type: 'genome', 'ko', 'pathway' or 'gene'
     Return: A Bio::KEGGI object
 =cut
 
@@ -93,10 +98,10 @@ sub new {
     
     # Open file
     eval {
-        open(INF, $infile);
+        open(INF, $infile) or die;
     };
     if ($@) {
-        warn "FATAL: Open KEGG file '$infile'}' failed!\n$!\n";
+        warn "FATAL: Open KEGG file '$infile' failed!\n$!.\n";
         exit 1;
     }
     
@@ -112,9 +117,11 @@ sub new {
     return $self;
 }
 
-# Private method
-#    Name:     DESTROY
-#    Desc:     Destructor
+=begin DESTROY
+    Name:   DESTROY
+    Desc:   Destructor, Private method
+    Return: None
+=cut
 
 sub DESTROY {
     my $self = shift;

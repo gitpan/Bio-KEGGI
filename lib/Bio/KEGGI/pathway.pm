@@ -5,7 +5,28 @@
 =head1 DESCRIPTION
 
     Parse KEGG pathway file (ftp://ftp.genome.jp/pub/kegg/pathway/pathway).
+
+=head1 METHODS
+
+=head2 next_rec
+
+    Name:   next_rec
+    Desc:   Get next KEGG record
+    Usage:  $o_keggi->next_rec()
+    Args:   none
+    Return: A Bio::KEGG::pathway object
     
+=head1 VERSION
+
+    v0.1.2
+
+=head1 AUTHOR
+    
+    zeroliu-at-gmail-dot-com
+    
+=cut
+
+=begin NOTE
     Returned data structure
     
     ----------------------------------------------------------------------------
@@ -45,10 +66,6 @@
     
     ----------------------------------------------------------------------------
 
-=head1 AUTHOR
-    
-    zeroliu-at-gmail-dot-com
-    
 =cut
 
 package Bio::KEGGI::pathway;

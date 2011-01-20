@@ -6,6 +6,28 @@
 
     Parse KEGG ko file (ftp://ftp.genome.jp/pub/kegg/genes/ko).
     
+=head1 METHODS
+
+=head2 next_rec
+
+    Name:   next_rec
+    Desc:   Get next KEGG record
+    Usage:  $o_keggi->next_rec()
+    Args:   none
+    Return: A Bio::KEGG::ko object
+    
+=head1 VERSION
+
+    v0.1.2
+    
+=head1 AUTHOR
+    
+    Haizhou Liu (zeroliu-at-gmail-dot-com)
+    
+=cut
+
+=begin NOTE
+
     Retruned data structure:
     
     ----------------------------------------------------------------------------
@@ -43,11 +65,7 @@
     }
     
     ----------------------------------------------------------------------------
-    
-=head1 AUTHOR
-    
-    zeroliu-at-gmail-dot-com
-        
+
 =cut
 
 package Bio::KEGGI::ko;
@@ -66,7 +84,7 @@ our $VERSION = 'v0.0.2';
 
 use base qw(Bio::KEGGI);
 
-=head2 next_rec
+=begin next_rec
     Name:   next_rec
     Desc:   Get next KEGG record
     Usage:  $o_keggi->next_rec()

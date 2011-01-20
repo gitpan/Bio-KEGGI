@@ -3,8 +3,6 @@
     Bio::KEGG - Perl module to fetch details parsed by Bio::KEGGI.
     
 =head1 SYNOPSIS
-
-
     
     my $keggi = Bio::KEGGI->new(
         -file => 'keggfilename',
@@ -29,7 +27,7 @@
 
 =head1 VERSION
 
-    0.0.1
+    0.1.2
     
 =head1 METHODS
 
@@ -65,6 +63,14 @@
     Args:
     Return: A string
     
+=head2 ec
+
+    Name:   ec
+    Desc:   Get KEGG EC information.
+    Usage:  $ra_ec = $o_kegg->ec()
+    Args:
+    Retuen: A reference to an array
+
 =head2 disease
 
     Name:   disease
@@ -92,9 +98,19 @@
     Name:   module
     Disc:   Get KEGG entry MODULE ids
     
-        $ra_module = [ $module_id, ... ];
+            $ra_module = [ $module_id, ... ];
     
     Usage:  $o_kegg->module()
+    Args:
+    Return: A reference to an array
+    
+=head2 class
+    Name:   class
+    Disc:   Get KEGG entry CLASS information
+        
+        $ra_class = [ $class, ... ];
+    
+    Usage:  $o_kegg->class()
     Args:
     Return: A reference to an array
     
@@ -133,15 +149,14 @@ package Bio::KEGG;
 use strict;
 use warnings;
 
-our $VERSION = "v0.0.2";
+our $VERSION = "v0.1.2";
 
 =begin new
     Name:   new
-    Desc:   Constructor for KEGG object
-    Usage:  Bio::KEGG->new()
+    Desc:   Constructor for Bio::KEGG object
+    Usage:  
     Args:
     Return: A KEGG object
-=end
 =cut
 
 sub new {
@@ -151,7 +166,7 @@ sub new {
     return;
 }
 
-=head2 id
+=begin id
     Name:   id
     Desc:   Get KEGG entry id
     Usage:  $acc = $o_kegg->id()
@@ -165,7 +180,7 @@ sub id {
     return $self->{'id'};
 }
 
-=head2 name
+=begin name
     Name:   name
     Desc:   Get KEGG entry NAME.
     Usage:  $name = $o_kegg->name()
@@ -179,7 +194,7 @@ sub name {
     return $self->{'name'};
 }
 
-=head2 desc
+=begin desc
     Name:   desc
     Desc:   Get KEGG entry DEFINITION information.
     Usage:  $desc = $o_kegg->desc()
@@ -193,7 +208,21 @@ sub desc {
     return $self->{'definit'};
 }
 
-=head2 disease
+=begin ec
+    Name:   ec
+    Desc:   Get EC information
+    Usage:  $o_kegg->ec()
+    Args:
+    Return: A reference to an array
+=cut
+
+sub ec {
+    my $self = shift;
+    
+    return $self->{'ec'};
+}
+
+=begin disease
     Name:   disease
     Desc:   Get KEGG entry DISEASE information.
     
@@ -210,7 +239,7 @@ sub disease {
     return $self->{'disease'};
 }
 
-=head2 pmid
+=begin pmid
     Name:   pmid
     Disc:   Get KEGG entry PUBMED ids.
     
@@ -227,7 +256,7 @@ sub pmid {
     return $self->{'pmid'};
 }
 
-=head2 module
+=begin module
     Name:   module
     Disc:   Get KEGG entry MODULE ids
     
@@ -244,10 +273,10 @@ sub module {
     return $self->{'module'};
 }
 
-=head2 class
+=begin class
     Name:   class
     Disc:   Get KEGG entry CLASS information
-    
+        
         $ra_class = [ $class, ... ];
     
     Usage:  $o_kegg->class()
@@ -261,7 +290,24 @@ sub class {
     return $self->{'class'};
 }
 
-=head2 dblink
+=begin pathway
+    Name:   pathway
+    Disc:   Get KEGG entry PATHWAY ids
+    
+            $ra_pathways = [ pathway_id, ... ];
+    
+    Usage:  $o_kegg->pathway()
+    Args:
+    Return: A reference to an array.
+=cut
+
+sub pathway {
+    my $self = shift;
+    
+    return $self->{'pathway'};
+}
+
+=begin dblink
     Name:   dblink
     Disc:   Get KEGG entry DBLINKS information
     

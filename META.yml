@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Bio-KEGGI
-version:            v0.0.2
+version:            v0.1.2
 abstract:           Module to handle KEGG genome, ko and pathway files
 author:
     - Haizhou Liu <zeroliu@gmail.com>

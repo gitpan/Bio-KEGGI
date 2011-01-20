@@ -1,11 +1,33 @@
 =head1 NAME
     
-    Bio::KEGGI::genome
+    Bio::KEGGI::genome - Parse KEGG genome entry file.
     
 =head1 DESCRIPTION
 
     Parse KEGG genome file (ftp://ftp.genome.jp/pub/kegg/genes/genome).
+
+=head1 METHODS
+
+=head2 next_rec
+
+    Name:   next_rec
+    Desc:   Get next KEGG record
+    Usage:  $o_keggi->next_rec()
+    Args:   none
+    Return: A Bio::KEGG::genome object
     
+=head1 VERSION
+
+    v0.1.2
+    
+=head1 AUTHOR
+
+    zeroliu-at-gmail-dot-com
+    
+=cut
+
+=begin NOTE
+
     Retruned data structure:
     
     ----------------------------------------------------------------------------
@@ -39,10 +61,7 @@
     
     ----------------------------------------------------------------------------
     
-=head1 AUTHOR
-
-    zeroliu-at-gmail-dot-com
-    
+=end
 =cut
 
 package Bio::KEGGI::genome;
@@ -57,11 +76,11 @@ use Bio::KEGG::genome;
 
 # use Smart::Comments;
 
-our $VERSION = "v0.0.2";
+our $VERSION = "v0.1.2";
 
 use base qw(Bio::KEGGI);
 
-=head2 next_rec
+=begin next_rec
     Name:   next_rec
     Desc:   Get next KEGG record
     Usage:  $o_keggi->next_rec()
@@ -95,18 +114,20 @@ sub next_rec {
 sub _get_next_rec {
     my $ifh = shift;
     
+    {
     # Since a KEGG record ended with '///'
-    local $/ = "\/\/\/\n";
+        local $/ = "\/\/\/\n";
     
-    my $rec;
+        my $rec;
     
-    if ($rec = <$ifh>) {
-        my @rec = split(/\n/, $rec);
-        
-        return \@rec;
-    }
-    else { # To the end of file
-        return;
+        if ($rec = <$ifh>) {
+            my @rec = split(/\n/, $rec);
+            
+            return \@rec;
+        }
+        else { # To the end of file
+            return;
+        }
     }
 }
 
@@ -114,8 +135,8 @@ sub _get_next_rec {
     Name:   _parse_genome_rec
     Desc:   Parse KEGG genome record
     Usage:  _parse_genome_rec($ra_rec)
-    Args:   A reference to an array of Bio::KEGGI::genome record
-    Return: A reference to a hash of Bio::KEGG record
+    Args:   A reference to an array of KEGG genome records
+    Return: A reference to a hash of KEGG genome record
 =cut
 
 sub _parse_genome_rec {
@@ -128,11 +149,12 @@ sub _parse_genome_rec {
         next if ( $row =~ /^\s*$/);
         next if ( $row =~ /\/\/\// );
         
-        if ($row =~ /^ENTRY\s+(.+?)\s+/) {
+        if ($row =~ /^ENTRY\s{7}(.+?)\s+/) {
             $rh_rec->{'id'} = $1;
             
             next if ( $rh_rec->{'id'} =~ /T3/); # Dismiss environmental samples
         }
+=begin
         elsif ($row =~ /^NAME/ ) {
             if ($row =~ /^NAME\s+(\w+),/) {
                 $rh_rec->{'name'} = $1;
@@ -144,26 +166,47 @@ sub _parse_genome_rec {
                 print '-'x50, "\n", "Unrecognized:\n", $row, "\n", '-'x50, "\n";
             }
         }
-        elsif ($row =~ /^DEFINITION\s+(.+?)$/) {
+=cut
+        # 'NAME        hin, H.influenzae, HAEIN, 71421'
+        elsif ($row =~ /^NAME\s{8}(.+?)$/) {
+            #my $name_str = $1;
+            
+            my ($org, $abbr, $hamap_id) = split(/,\s/, $1);
+            
+            $rh_rec->{'name'} = $org;
+            $rh_rec->{'abbr'} = $abbr;
+            $rh_rec->{'hamap_id'} = $hamap_id;
+            
+=begin            
+            if ($name_str =~ /^(\w+), ([\w\.]+), (\w+), (\d+)/) {
+                $rh_rec->{'name'} = $1;
+                $rh_rec->{'abbr'} = $2;
+                $rh_rec->{'hamap_id'} = $3;
+                # Dismissed. Use 'TAXONOMY    TAX:71421' line
+                # $rh_rec->{'taxid'} = $4;  
+            }
+=cut
+        }
+        elsif ($row =~ /^DEFINITION\s{2}(.+?)$/) {
             my $cur_section = 'DEFINTION';
             
             $rh_rec->{'definit'} = $1;
         }
-        elsif ($row =~ /^ANNOTATION\s+(.+)/) {
+        elsif ($row =~ /^ANNOTATION\s{2}(.+)/) {
             $rh_rec->{'annotation'} = $1;
         }
         elsif ($row =~ /^TAXONOMY\s{4}TAX:(\d+)/) {
             $rh_rec->{'taxid'} = $1;
         }
-        elsif ($row =~ /^\s{2}LINEAGE\s+(.+?)$/) {
+        elsif ($row =~ /^\s{2}LINEAGE\s{3}(.+?)$/) {
             $cur_section = 'TAX_LINE';
             
             $rh_rec->{'tax_lineage'} = $1;
         }
-        elsif ($row =~ /^DATA_SOURCE\s+(.+)$/) {
+        elsif ($row =~ /^DATA_SOURCE\s(.+)$/) {
             $rh_rec->{'data_src'} = $1;
         }
-        elsif ($row =~ /^ORIGINAL_DB\s+(.+)$/) {
+        elsif ($row =~ /^ORIGINAL_DB\s(.+)$/) {
             $rh_rec->{'origin_db'} = $1;
         }
         elsif ($row =~ /^DISEASE\s{5}(\w+)\s/) {
@@ -171,7 +214,7 @@ sub _parse_genome_rec {
             
             push @{ $rh_rec->{'disease'} }, $1;
         }
-        elsif ($row =~ /^COMMENT\s+(.+?)$/) {
+        elsif ($row =~ /^COMMENT\s{5}(.+?)$/) {
             $cur_section = 'COMMENT';
             
             $rh_rec->{'comment'} = $1;
@@ -245,7 +288,7 @@ sub _parse_genome_rec {
             $rh_rec->{'rna'} = $1;
         }
         elsif ($row =~ /^REFERENCE/) {
-            if ($row =~ /^REFERENCE\s+PMID:(\d+)/) {
+            if ($row =~ /^REFERENCE\s{3}PMID:(\d+)/) {
                 $cur_section = 'REFERENCE';
                 push @{ $rh_rec->{'pmid'} }, $1;
             }

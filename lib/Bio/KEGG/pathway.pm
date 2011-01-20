@@ -6,6 +6,14 @@
 
     Fetch data from a Bio::KEGGI::pathway object
 
+=head1 AUTHOR
+
+    Haizhou Liu, zeroliu-at-gmail-dot-com
+
+=head1 VERSION
+
+    0.1.2
+    
 =head1 METHODS
 
 =head2 ec
@@ -135,23 +143,9 @@ use base qw(Bio::KEGG);
 
 # use Smart::Comments;
 
-our $VERSION = 'v0.0.2';
+our $VERSION = 'v0.1.2';
 
-=head2 ec
-    Name:   ec
-    Desc:   Get KEGG entry ENZYME
-    Usage:  $o_kegg->ec()
-    Args:
-    Return: A reference to an array
-=cut
-
-sub ec {
-    my $self = shift;
-    
-    return $self->{'ec'};
-}
-
-=head2 drug
+=begin drug
     Name:   drug
     Desc:   Get KEGG pathway entry DRUG.
     Usage:  $o_kegg->drug()
@@ -165,7 +159,7 @@ sub drug {
     return $self->{'drug'};
 }
 
-=head2 map
+=begin map
     Name:   map
     Desc:   Get KEGG pathway entry PATHWAY_MAP.
     Usage:  $o_kegg->map()
@@ -179,7 +173,7 @@ sub map {
     return $self->{'map'};
 }
 
-=head2 organism
+=begin organism
     Name:   organism
     Desc:   Get KEGG pathway entry ORGANISM.
     Usage:  $o_kegg->organism()
@@ -193,7 +187,7 @@ sub organism {
     return $self->{'organism'};
 }
 
-=head2 org
+=begin org
     Name:   org
     Desc:   Get KEGG pathway entry ORGANISM abbreviated.
     Usage:  $o_kegg->org()
@@ -207,17 +201,17 @@ sub org {
     return $self->{'org_abbr'};
 }
     
-=head2 gene
+=begin gene
     Name:   gene
     Disc:   Get KEGG entry GENE information
-    ------------------------------------------------------------------
+    
         $rh_gene = {
             'entry' => $entry,
             'name'  => [ $name, ... ],
             'ko'    => [ $ko, ... ],
             'ec'    => [ $ec, ... ],
         };
-    ------------------------------------------------------------------
+    
     Usage:  $o_kegg->gene()
     Args:
     Return: A reference to a hash.
@@ -229,12 +223,12 @@ sub gene {
     return $self->{'gene'};
 }
 
-=head2 orthology
+=begin orthology
     Name:   orthology
     Disc:   Get KEGG entry ORTHOLOGY.
-    ------------------------------------------------------------------
+    
         $ra_orthology = [ $orth_id, ... ];
-    ------------------------------------------------------------------
+    
     Usage:  $o_kegg->orthology
     Args:
     Return: A reference to an array
@@ -246,7 +240,7 @@ sub orthology {
     return $self->{'orthology'};
 }
 
-=head2 reaction
+=begin reaction
     Name:   reaction
     Desc:   Get KEGG entry REACTION
     Usage:  $o_kegg->reaction()
@@ -260,12 +254,12 @@ sub reaction {
     return $self->{'reaction'};
 }
 
-=head2 compound
+=begin compound
     Name:   compound
     Disc:   Get KEGG entry COMPOUND
-    ------------------------------------------------------------------
+    
         $ra_compound = [ $compound_id, ... ];
-    ------------------------------------------------------------------
+    
     Usage:  $o_kegg->compound()
     Args:
     Return: A reference to an array
@@ -277,12 +271,12 @@ sub compound {
     return $self->{'compound'};
 }
 
-=head2 rel_pathway
+=begin rel_pathway
     Name:   compound
     Disc:   Get KEGG entry REL_PATHWAY
-    ------------------------------------------------------------------
+    
         $ra_rel_pathway = [ $rel_pathway_id, ... ];
-    ------------------------------------------------------------------
+    
     Usage:  $o_kegg->rel_pathway()
     Args:
     Return: A reference to an array
@@ -294,7 +288,7 @@ sub rel_pathway {
     return $self->{'rel_pathway'};
 }
 
-=head2 ko_pathway
+=begin ko_pathway
     Name:   ko_pathway
     Disc:   Get KEGG entry KO_PATHWAY
     Usage:  $o_kegg->compound()
