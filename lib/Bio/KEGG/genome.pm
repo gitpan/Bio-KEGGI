@@ -15,7 +15,7 @@
 
 =head1 VERSION
 
-    0.1.2
+    0.1.5
     
 =head1 METHODS
 
@@ -27,7 +27,7 @@
     Args:
     Return: A string
 
-=head22hamap_id
+=head2 hamap_id
 
     Name:   hamap_id
     Desc:   Get KEGG genome entry HAMPA id.
@@ -118,14 +118,6 @@
     Args:
     Return: A reference to a hash.
     
-=head1 VERSION
-
-    v0.1.2
-    
-=head1 AUTHOR
-
-    Haizhou Liu (zeroliu-at-gmail-dot-com)
-    
 =cut
 
 package Bio::KEGG::genome;
@@ -137,7 +129,7 @@ use base qw(Bio::KEGG);
 
 # use Smart::Comments;
 
-our $VERSION = "v0.1.2";
+our $VERSION = "v0.1.5";
 
 =begin abbrsp
     Name:   abbrsp

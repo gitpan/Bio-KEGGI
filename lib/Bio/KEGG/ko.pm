@@ -12,7 +12,7 @@
 
 =head1 VERSION
 
-    0.1.2
+    0.1.5
     
 =head1 METHODS
 
@@ -39,6 +39,7 @@
     Return: A reference to an array.
     
 =head2 gene
+
     Name:   gene
     Disc:   Get KEGG ko entry GENES information
         
@@ -72,7 +73,7 @@ use base qw(Bio::KEGG);
 
 # use Smart::Comments;
 
-our $VERSION = 'v0.1.2';
+our $VERSION = 'v0.1.5';
 
 =begin ec
     Name:   ec

@@ -6,7 +6,7 @@ package Bio::KEGGI;
     
 =head1 VERSION
 
-    Version 0.1.2
+    Version 0.1.5
 
 =head1 SYNOPSIS
 
@@ -21,17 +21,35 @@ package Bio::KEGGI;
         print $kegg->id, "\n";
     }
     
-    # Now supported KEGG file type are "genome", "ko" and "pathway".
+    Now supported KEGG file type are "genome", "ko", "pathway" and "gene".
     
 =head1 DESCRIPTION
 
     Bio::KEGGI is used to parse KEGG files:
+
+=over
+
+=item genome
+
+    ftp://ftp.genome.jp/pub/kegg/genes/genome
     
-    genome:  ftp://ftp.genome.jp/pub/kegg/genes/genome
-    ko:      ftp://ftp.genome.jp/pub/kegg/genes/ko
-    pathway: ftp://ftp.genome.jp/pub/kegg/pathway/pathway
+=item ko
     
-    KEGG data details could be retrieved by module Bio::KEGG.
+    ftp://ftp.genome.jp/pub/kegg/genes/ko
+    
+=item pathway
+
+    ftp://ftp.genome.jp/pub/kegg/pathway/pathway
+
+=item gene
+
+    Organism gene entries. such as:
+    
+    ftp://ftp.genome.jp/pub/kegg/genes/organisms/aac/A.acidocaldarius.ent
+
+=back
+
+    KEGG data details could be retrieved by module L<Bio::KEGG>.
 
 =head1 SEE ALSO
 
@@ -52,6 +70,7 @@ package Bio::KEGGI;
 =head1 METHODS
 
 =head2 new
+
     Name:   new
     Desc:   A constructor for a KEGGI object.
     Usage:  Bio::KEGGI->new(
@@ -74,7 +93,7 @@ use Text::Trim;
 
 use Bio::KEGG;
 
-our $VERSION = "v0.1.2";
+our $VERSION = "v0.1.5";
 
 =begin new
     Name:   new

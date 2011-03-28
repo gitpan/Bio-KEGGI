@@ -18,7 +18,7 @@
     
 =head1 VERSION
 
-    v0.1.2
+    v0.1.5
     
 =head1 AUTHOR
 
@@ -61,7 +61,6 @@
     
     ----------------------------------------------------------------------------
     
-=end
 =cut
 
 package Bio::KEGGI::genome;
@@ -76,7 +75,7 @@ use Bio::KEGG::genome;
 
 # use Smart::Comments;
 
-our $VERSION = "v0.1.2";
+our $VERSION = "v0.1.5";
 
 use base qw(Bio::KEGGI);
 

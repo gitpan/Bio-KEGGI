@@ -12,7 +12,7 @@
 
 =head1 VERSION
 
-    0.1.2
+    0.1.5
     
 =head1 METHODS
 
@@ -143,7 +143,7 @@ use base qw(Bio::KEGG);
 
 # use Smart::Comments;
 
-our $VERSION = 'v0.1.2';
+our $VERSION = 'v0.1.5';
 
 =begin drug
     Name:   drug

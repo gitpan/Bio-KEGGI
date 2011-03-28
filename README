@@ -9,6 +9,9 @@ NAME
     ko:      ftp://ftp.genome.jp/pub/kegg/genes/ko
     pathway: ftp://ftp.genome.jp/pub/kegg/pathway/pathway
 
+    and KEGG organism gene entries, such as:
+    ftp://ftp.genome.jp/pub/kegg/genes/organisms/aac/A.acidocaldarius.ent
+
     For more information, refer to the documentation for Bio::KEGGI and
     Bio::KEGG.
 
@@ -52,7 +55,7 @@ You can also look for information at:
 
 LICENSE AND COPYRIGHT
 
-Copyright (C) 2010 Haizhou Liu
+Copyright (C) 2011 Haizhou Liu
 
 All Rights Reserved.
 

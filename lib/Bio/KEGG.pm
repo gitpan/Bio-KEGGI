@@ -19,7 +19,8 @@
     Create a new Bio::KEGG object is not supported.
     
     For more details for different input files, please refer to documents of
-    Bio::KEGG::genome, Bio::KEGG::ko and Bio::KEGG::pathway.
+    L<Bio::KEGG::genome>, L<Bio::KEGG::ko>, L<Bio::KEGG::pathway> and
+    L<Bio::KEGG::gene>.
     
 =head1 AUTHOR
 
@@ -27,7 +28,7 @@
 
 =head1 VERSION
 
-    0.1.2
+    0.1.5
     
 =head1 METHODS
 
@@ -39,14 +40,6 @@
     Args:
     Return: A string
     
-=head2 desc
-
-    Name:   desc
-    Desc:   Get KEGG entry DEFINITION information.
-    Usage:  $desc = $o_kegg->desc()
-    Args:
-    Return: A string
-
 =head2 name
 
     Name:   name
@@ -105,6 +98,7 @@
     Return: A reference to an array
     
 =head2 class
+
     Name:   class
     Disc:   Get KEGG entry CLASS information
         
@@ -114,17 +108,17 @@
     Args:
     Return: A reference to an array
     
-=head2 class
+=head2 pathway
 
-    Name:   class
-    Disc:   Get KEGG entry CLASS information
+    Name:   pathway
+    Disc:   Get KEGG entry PATHWAY ids
     
-        $ra_class = [ $class, ... ];
+            $ra_pathways = [ pathway_id, ... ];
     
-    Usage:  $o_kegg->class()
+    Usage:  $o_kegg->pathway()
     Args:
-    Return: A reference to an array
-    
+    Return: A reference to an array.
+
 =head2 dblink
 
     Name:   dblink
@@ -149,7 +143,7 @@ package Bio::KEGG;
 use strict;
 use warnings;
 
-our $VERSION = "v0.1.2";
+our $VERSION = "v0.1.5";
 
 =begin new
     Name:   new
@@ -157,7 +151,6 @@ our $VERSION = "v0.1.2";
     Usage:  
     Args:
     Return: A KEGG object
-=cut
 
 sub new {
     my $class = shift;
@@ -165,6 +158,8 @@ sub new {
     
     return;
 }
+
+=cut
 
 =begin id
     Name:   id
